@@ -3,6 +3,7 @@ pipeline {
 
     environment {
         AWS_DEFAULT_REGION = 'us-east-1'
+        EKS_PUBLIC_KEY     = credentials('eks-public-key') // Jenkins secret
     }
 
     stages {
@@ -32,7 +33,7 @@ pipeline {
         stage('Terraform Validate') {
             steps {
                 dir('4-eks') {
-                    sh 'terraform validate'
+                    sh "terraform validate -var \"eks_public_key=${EKS_PUBLIC_KEY}\""
                 }
             }
         }
@@ -40,7 +41,7 @@ pipeline {
         stage('Terraform Plan') {
             steps {
                 dir('4-eks') {
-                    sh 'terraform plan'
+                    sh "terraform plan -var \"eks_public_key=${EKS_PUBLIC_KEY}\""
                 }
             }
         }
@@ -48,10 +49,13 @@ pipeline {
         stage('Terraform Apply') {
             steps {
                 dir('4-eks') {
-                    sh 'terraform apply -auto-approve'
+                    sh "terraform apply -auto-approve -var \"eks_public_key=${EKS_PUBLIC_KEY}\""
                 }
             }
         }
 
     }
 }
+
+
+

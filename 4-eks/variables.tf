@@ -14,3 +14,8 @@ variable "common_tags" {
     Terraform   = "True"
   }
 }
+
+variable "eks_public_key" {
+  type        = string
+  description = "Public SSH key for EKS nodes"
+}

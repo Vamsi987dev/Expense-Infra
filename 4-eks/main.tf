@@ -1,6 +1,6 @@
 resource "aws_key_pair" "eks" {
   key_name   = "eks"
-  public_key = file("~/.ssh/eks-key.pub") 
+  public_key = var.eks_public_key
 }
 
 
