@@ -33,7 +33,7 @@ pipeline {
         stage('Terraform Validate') {
             steps {
                 dir('4-eks') {
-                    sh "terraform validate -var \"eks_public_key=${EKS_PUBLIC_KEY}\""
+                    sh 'terraform validate'
                 }
             }
         }
