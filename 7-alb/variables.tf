@@ -14,8 +14,19 @@ variable "common_tags" {
     Terraform   = "True"
   }
 }
+variable "ingress_alb_tags" {
+    default = {
+        Component = "web-alb"
+    }
+}
 
-variable "eks_public_key" {
-  type        = string
-  description = "Public SSH key for EKS nodes"
+
+variable "zone_name" {
+    default = "daws81s.icu"
+}
+
+variable "zone_id" {
+  type    = string
+  default = "Z07106382R8OPNWZHVRIY"
+
 }

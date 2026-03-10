@@ -71,6 +71,15 @@ module "mysql_sg" {
   sg_name = "mysql-sg"
 }
 
+resource "aws_security_group_rule" "mysql_to_worker_node" {
+    type = "ingress"
+    from_port = 3306
+    to_port = 3306
+    protocol = "tcp"
+    source_security_group_id = module.mysql_sg.id
+    security_group_id = module.worker_node_sg.id
+}
+
 #Bastion:
 module "bastion_sg" {
   source       = "git::https://github.com/Vamsi987dev/project-terraform-infrastructure.git//modules/sg?ref=main"
